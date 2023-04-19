@@ -1,5 +1,7 @@
 <script>
-  import { DataTable } from 'carbon-components-svelte';
+  import { DataTable, Button } from 'carbon-components-svelte';
+  import SaveData from './SaveData.svelte';
+  import Save from 'carbon-icons-svelte/lib/Save.svelte';
 
   export let tempo;
   export let minim;
@@ -22,6 +24,21 @@
   //   { note: '1/64', value: hemidemiSemiQuaver },
   //   { note: '1/128', value: oneHundredTwentyEight },
   // ];
+
+  $: data = [
+    {
+      id: 1,
+      bpm: tempo,
+      '1/2': minim,
+      '1/4': quarter,
+      '1/8': eighthNote,
+      '1/8T': eightDotted,
+      '1/16': semiQuaver,
+      '1/32': demiSemiQuaver,
+      '1/64': hemidemiSemiQuaver,
+      '1/128': oneHundredTwentyEight,
+    },
+  ];
 </script>
 
 <!-- <table style="width: 750px">
@@ -49,18 +66,19 @@
     { key: '1/64', value: '1/64' },
     { key: '1/128', value: '1/128' },
   ]}
-  rows={[
-    {
-      id: 1,
-      bpm: tempo,
-      '1/2': minim,
-      '1/4': quarter,
-      '1/8': eighthNote,
-      '1/8T': eightDotted,
-      '1/16': semiQuaver,
-      '1/32': demiSemiQuaver,
-      '1/64': hemidemiSemiQuaver,
-      '1/128': oneHundredTwentyEight,
-    },
-  ]}
+  rows={data}
+  style="margin-bottom: 20px;"
+/>
+
+<SaveData
+  {data}
+  {tempo}
+  {minim}
+  {quarter}
+  {eighthNote}
+  {eightDotted}
+  {semiQuaver}
+  {demiSemiQuaver}
+  {hemidemiSemiQuaver}
+  {oneHundredTwentyEight}
 />
