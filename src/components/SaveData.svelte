@@ -40,7 +40,12 @@
   };
 </script>
 
-<Button size="sm" icon={Save} on:click={storeData}>store</Button>
+<Button
+  size="sm"
+  iconDescription="store converted data"
+  icon={Save}
+  on:click={storeData}>store</Button
+>
 
 <h2 class="store">Convert Storage</h2>
 <DataTable

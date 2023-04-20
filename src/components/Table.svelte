@@ -1,7 +1,6 @@
 <script>
-  import { DataTable, Button } from 'carbon-components-svelte';
+  import { DataTable } from 'carbon-components-svelte';
   import SaveData from './SaveData.svelte';
-  import Save from 'carbon-icons-svelte/lib/Save.svelte';
 
   export let tempo;
   export let minim;
