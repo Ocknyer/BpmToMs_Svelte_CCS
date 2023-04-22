@@ -1,6 +1,13 @@
 <script>
-  import { DataTable, Button } from 'carbon-components-svelte';
+  import {
+    DataTable,
+    Button,
+    Modal,
+    TextInput,
+  } from 'carbon-components-svelte';
   import Save from 'carbon-icons-svelte/lib/Save.svelte';
+  import Reset from 'carbon-icons-svelte/lib/Reset.svelte';
+  import SetList from './SetList.svelte';
 
   export let data;
   export let tempo;
@@ -14,6 +21,7 @@
   export let oneHundredTwentyEight;
 
   let newData = [];
+  let setlist = [];
 
   const storeData = () => {
     if (newData.length === 0) {
@@ -38,14 +46,54 @@
       ];
     }
   };
+
+  const resetData = () => {
+    if (newData) {
+      newData = [];
+    }
+  };
+
+  let open = false;
+
+  const storeSetlist = () => {
+    if (newData.length) {
+      setlist.push(newData);
+      setlist = setlist;
+      open = true;
+      console.log(setlist);
+    }
+  };
+
+  let list = '';
+
+  $: set = [{ songName: '', setlist: {} }];
+
+  const setSongList = () => {
+    set[0].songName = list;
+    set[0].setlist = [...setlist];
+    open = false;
+  };
+
+  $: {
+    console.log(set);
+  }
 </script>
 
-<Button
-  size="sm"
-  iconDescription="store converted data"
-  icon={Save}
-  on:click={storeData}>store</Button
->
+<div class="btn-box">
+  <Button
+    size="sm"
+    iconDescription="store converted data"
+    icon={Save}
+    on:click={storeData}>store</Button
+  >
+  <Button
+    size="sm"
+    kind="danger"
+    iconDescription="reset data"
+    icon={Reset}
+    on:click={resetData}>reset</Button
+  >
+</div>
 
 <h2 class="store">Convert Storage</h2>
 <DataTable
@@ -64,7 +112,40 @@
   style="margin-bottom: 100px"
 />
 
+<Button size="sm" on:click={storeSetlist}>Store Set Lists</Button>
+
+<Modal
+  bind:open
+  hasForm
+  modalHeading="Add set list name"
+  primaryButtonText="Confirm"
+  secondaryButtonText="Cancel"
+  selectorPrimaryFocus="#db-name"
+  shouldSubmitOnEnter
+  on:click:button--secondary={() => (open = false)}
+  on:click:button--primary={setSongList}
+  on:open
+  on:close
+  on:submit
+>
+  <p>Create a new set list</p>
+  <br />
+  <TextInput
+    id="db-name"
+    labelText="Set list name"
+    placeholder="Enter set list name..."
+    bind:value={list}
+  />
+</Modal>
+
+<SetList {setlist} />
+
 <style>
+  .btn-box {
+    display: flex;
+    gap: 12px;
+  }
+
   .store {
     font-size: 30px;
     font-weight: 700;

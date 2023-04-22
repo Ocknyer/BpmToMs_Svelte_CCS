@@ -1,9 +1,6 @@
 <script>
   import {
     Header,
-    HeaderNav,
-    HeaderNavItem,
-    HeaderNavMenu,
     SkipToContent,
     HeaderActionLink,
     HeaderUtilities,
@@ -19,9 +16,7 @@
   import LogoGithub from 'carbon-icons-svelte/lib/LogoGithub.svelte';
   import SettingsAdjust from 'carbon-icons-svelte/lib/SettingsAdjust.svelte';
 
-  let theme = 'white'; // "white" | "g10" | "g80" | "g90" | "g100"
-
-  $: document.documentElement.setAttribute('theme', theme);
+  // $: document.documentElement.setAttribute('theme', theme);
 
   let isSideNavOpen = false;
 </script>
@@ -34,25 +29,14 @@
   <svelte:fragment slot="skip-to-content">
     <SkipToContent />
   </svelte:fragment>
-  <HeaderNav>
-    <HeaderNavItem href="/" text="Link 1" />
-    <HeaderNavItem href="/" text="Link 2" />
-    <HeaderNavItem href="/" text="Link 3" />
-    <HeaderNavMenu text="Menu">
-      <HeaderNavItem href="/" text="Link 1" />
-      <HeaderNavItem href="/" text="Link 2" />
-      <HeaderNavItem href="/" text="Link 3" />
-    </HeaderNavMenu>
-  </HeaderNav>
   <HeaderUtilities>
-    <HeaderAction icon={SettingsAdjust} ref={theme}>
+    <HeaderAction icon={SettingsAdjust}>
       <Theme
-        bind:theme
+        render="toggle"
         persist
         persistKey="__carbon-theme"
-        render="toggle"
         toggle={{
-          themes: ['white', 'g90'],
+          themes: ['white', 'g80'],
           labelA: 'Enable dark mode',
           labelB: 'Enable dark mode',
           hideLabel: true,
@@ -61,7 +45,7 @@
       />
     </HeaderAction>
     <HeaderActionLink
-      href="https://github.com/Ocknyer/BpmToMs_Svelte"
+      href="https://github.com/Ocknyer/BpmToMs_Svelte_CCS"
       icon={LogoGithub}
       target="_blank"
     />
@@ -73,7 +57,7 @@
     <SideNavLink href="/" text="Link 1" />
     <SideNavLink href="/" text="Link 2" />
     <SideNavLink href="/" text="Link 3" />
-    <SideNavMenu text="Menu">
+    <SideNavMenu text="Set Lists">
       <SideNavMenuItem href="/" text="Link 1" />
       <SideNavMenuItem href="/" text="Link 2" />
       <SideNavMenuItem href="/" text="Link 3" />

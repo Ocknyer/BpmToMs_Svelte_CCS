@@ -3,6 +3,7 @@
   import Input from './components/Input.svelte';
   import Table from './components/Table.svelte';
   import Header from './components/Header.svelte';
+  import { Theme } from 'carbon-components-svelte';
 
   let tempo = 100;
 
@@ -27,6 +28,8 @@
     }
   };
 
+  let theme = 'white'; // "white" | "g10" | "g80" | "g90" | "g100"
+
   const editTempo = (e) => {
     tempo = parseInt(e.target.value);
   };
@@ -43,13 +46,9 @@
   $: oneHundredTwentyEight = Math.ceil(baseBPM / 32) + 'ms';
 </script>
 
-<!-- <RadioButtonGroup legendText="Carbon Theme" bind:selected={theme}>
-  {#each ['white', 'g10', 'g80', 'g90', 'g100'] as value}
-    <RadioButton labelText={value} {value} />
-  {/each}
-</RadioButtonGroup> -->
+<Theme bind:theme persist persistKey="__carbon-theme" />
 
-<Header />
+<Header {theme} />
 
 <div id="app">
   <h1 class="title">BPM to MS</h1>
