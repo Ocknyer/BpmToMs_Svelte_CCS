@@ -5,7 +5,7 @@
 </script>
 
 <div>
-  <!-- <DataTable
+  <DataTable
     headers={[
       { key: 'bpm', value: 'BPM' },
       { key: '1/2', value: '1/2' },
@@ -18,5 +18,5 @@
       { key: '1/128', value: '1/128' },
     ]}
     rows={setlist[0]}
-  /> -->
+  />
 </div>
